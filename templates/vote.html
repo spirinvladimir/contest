@@ -1,0 +1,65 @@
+<template name="vote">
+	
+	{{> header}}	
+
+	<div class="container">
+
+		<div class="row">
+		  {{> contentheader}}
+		</div>
+
+		{{#each designs}}
+		<div class="row voting">
+			<div class="col-sm-2">
+			Design Oleh: 
+		  		<span style="font-weight: bolder">{{getUser createdBy}}</span>
+		  	</div>
+
+		  <div class="col-sm-8">
+			  	<div class="row">
+			  	<img src="{{designURL}}" class="design"></div>
+			  	<div class="row"><h2 class="contest-title">{{title}}</h2></div>
+			  	<div class="row"><p class="contest-descriptions">{{descriptions}}</p></div>	
+		  </div>
+		  
+		  <div class="col-sm-2"> 
+		  	<a id="vote" name="5" href="#" class="btn btn-info btn-lg btn-block btn-vote {{userVotes _id 5}}">5</a>
+		  	<a id="vote" name="4" href="#" class="btn btn-info btn-lg btn-block btn-vote {{userVotes _id 4}}">4</a>
+		  	<a id="vote" name="3" href="#" class="btn btn-info btn-lg btn-block btn-vote {{userVotes _id 3}}">3</a>
+		  	<a id="vote" name="2" href="#" class="btn btn-info btn-lg btn-block btn-vote {{userVotes _id 2}}">2</a>
+		  	<a id="vote" name="1" href="#" class="btn btn-info btn-lg btn-block btn-vote {{userVotes _id 1}}">1</a>
+		  	<br /><br />
+		  	<div class="stat">
+		  		<div class="row header">Jumlah Mata</div>
+		  		<div class="row content">{{score}}</div>
+		  	</div>
+		  	<div class="stat">
+		  		<div class="row header">Bil. Undian</div>
+		  		<div class="row content">{{counter}}</div>
+		  	</div>		  	
+		  	
+		  </div>
+
+		 </div>
+
+		 <div class="hr"></div>
+
+		  {{/each}}
+
+
+		<!-- <input type="button" class="increment" value="Give 5 Points">
+		<input type="button" class="decrement" value="Take 5 Points">
+		<input type="button" class="remove" value="Remove Design"> -->
+
+		{{#if showSelectedPlayer}}
+		Selected Player: {{showSelectedPlayer.name}}
+		{{/if}}
+
+		
+
+
+	</div>
+
+	{{> footer}}
+
+</template>
