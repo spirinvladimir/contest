@@ -11,10 +11,10 @@ Meteor.startup(function () {
     },
     getFileName: function(fileInfo, formData) {
       if (formData && formData.prefix != null) {
-        return formData.prefix + '_' + fileInfo;
+        return formData.prefix + '_' + fileInfo.name;
       }
       console.log(fileInfo);
-      return fileInfo;
+      return fileInfo.name;
     },
     finished: function(fileInfo, formData) {
       console.log('upload info data here');
