@@ -80,6 +80,38 @@ if(Meteor.isClient){
   });
 
   Template.addPlayerForm.helpers({
+    invokeAfterLoad: function () {
+        Meteor.defer(function () {
+            var getInput = function () {
+                    return document.getElementsByClassName('jqUploadclass')[0];
+                },
+                bind = function (el, fn) {
+                    $(el).replaceWith($(el).clone());
+                    getInput().addEventListener('change', fn);
+                },
+                previewHandle = function () {;
+                    var parent = document.getElementsByClassName('list-inline')[0],
+                        input = getInput(),
+                        file = input.files[0],
+                        reader  = new FileReader();
+                    reader.onloadend = function () {
+                        var li = document.createElement('li'),
+                            img = new Image();
+                        li.className = 'documentItem';
+                        img.setAttribute('width', '80%');
+                        li.appendChild(img);
+                        parent.appendChild(li);
+                        img.src = reader.result;
+                    };
+                    parent.innerHTML = '';
+                    if (file) {
+                      reader.readAsDataURL(file);
+                    }
+                    bind(input, previewHandle);
+                };
+            bind(getInput(), previewHandle);
+        });
+    },
     myFormData: function() {
       return { directoryName: 'images', prefix: this._id, _id: this._id }
     },
